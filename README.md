@@ -1,4 +1,4 @@
-# ek691_AgileProductDev
+# DoorHub
 Repo for the Lean &amp; Agile Product Development course at Boston University
 
 Team currently made up of:
