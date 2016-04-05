@@ -91,8 +91,17 @@ def login():
             login_user(user)
             return redirect(url_for('index'))
         else:
-	    print "AHHHHHHHHHHHH..\n\n"
-            return abort(401)
+	    return Response('''
+        	<h1>DoorHub Login</h1>
+        	<form action="" method="post">
+            	    <p><input type=text name=username>
+            	    <p><input type=password name=password>
+            	    <p><input type=submit value=Login>
+        	</form>
+            ''')
+
+	    #print "AHHHHHHHHHHHH..\n\n"
+            #return abort(401)
     else:
         return Response('''
 	<h1>DoorHub Login</h1>
@@ -141,13 +150,51 @@ def on():
     return redirect(url_for('index'))
 
 
-@app.route('/onepass/')
+@app.route('/onepass/', methods=["GET", "POST"])
 def onepass():
-    print "Texting Onetime Pass"
+    # print "Texting Onetime Pass"
     # Uncomment to run Script
     # subprocess.Popen(['/usr/bin/env', 'python', 'onepass.py'], subprocess.PIPE)
     # app.r('/off/')
-    return redirect(url_for('index'))
+#    return redirect(url_for('index'))
+    if request.method == 'POST':
+        pnumber = request.form['pnumber']
+        hours = request.form['hours']
+        if pnumber:
+	    if hours:
+	        print "HEY LMAO IT WORKED JALELUIA"
+
+		subprocess.Popen(['/usr/bin/env', 'python', 'onepass.py', pnumber, hours], subprocess.PIPE)
+		return redirect(url_for('index'))
+        #    id = username
+        #    user = User(id)
+        #    login_user(user)
+        #    return redirect(url_for('index'))
+        else:
+            return Response('''
+                <h1>Please Fill Out Both Forms:</h1>
+                <form action="" method="post">
+		    Phone Number:<br>
+                    <p><input type=text name=pnumber>
+		    Hours:<br>
+                    <p><input type=text name=hours>
+                    <p><input type=submit value=OneTime>
+                </form>
+            ''')
+
+            #print "AHHHHHHHHHHHH..\n\n"
+            #return abort(401)
+    else:
+        return Response('''
+        <h1>OneTime Pass:</h1>
+        <form action="" method="post">
+	    Phone Number:<br>
+            <p><input type=text name=pnumber><br>
+	    Hours:<br>
+            <p><input type=text name=hours>
+            <p><input type=submit value=OneTime>
+        </form>
+        ''')
 
 
 
