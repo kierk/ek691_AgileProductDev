@@ -141,6 +141,14 @@ def login():
 def index():
     return render_template('index.html')
 
+
+@app.route('/seclog/',methods=["GET"])
+def seclog():
+    with open( 'itworked.txt','r') as f:
+	content = f.read()
+    return render_template('template.html', content=content)
+
+
 @app.route('/on/')
 def on():
     print "Opening Door From Authenticated"
