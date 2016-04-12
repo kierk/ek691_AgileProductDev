@@ -144,7 +144,7 @@ def index():
 
 @app.route('/seclog/',methods=["GET"])
 def seclog():
-    with open( 'itworked.txt','r') as f:
+    with open( 'itworks.txt','r') as f:
 	content = f.read()
     return render_template('template.html', content=content)
 
