@@ -5,8 +5,8 @@ import time
 import RPi.GPIO as GPIO
  
 #SET STEP NUMBER
-stepNumber = 500
-holdTime = 5
+stepNumber = 5000
+holdTime = 3
 
 # Use BCM GPIO references
 # instead of physical pin numbers

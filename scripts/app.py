@@ -45,7 +45,22 @@ users = [User(id) for id in range(1, 21)]
 @login_required
 def logout():
     logout_user()
-    return Response('<p>Logged out</p>')
+    return Response('''
+	<!doctype html>
+	<html>
+	<head>
+	<title>DoorHub Logout Success :)</title>
+	<link rel="stylesheet" href="/static/style.css" />
+	</head>
+	<body>
+	<hr>
+	<a>Logged Out :)</a>
+	<hr>
+	<a href="/">Home</a>
+	<hr>
+	</body>
+	</html>
+	''')
 
 
 # handle login failed
@@ -144,9 +159,22 @@ def index():
 
 @app.route('/seclog/',methods=["GET"])
 def seclog():
-    with open( 'itworks.txt','r') as f:
+    with open( 'doorhub.log','r') as f:
 	content = f.read()
     return render_template('template.html', content=content)
+
+@app.route('/cVepr0rR37821as12lk3/',methods=["GET"])
+def unauth():
+    return render_template('index2.html')
+
+@app.route('/unon/')
+def unon():
+    print "Opening Door From Un-Authenticated"
+    # Uncomment to run Script
+    # subprocess.Popen(['/usr/bin/env', 'python', 'open.py'], subprocess.PIPE)
+    #app.r('/off/')
+    return redirect(url_for('unauth'))
+
 
 
 @app.route('/on/')
