@@ -175,6 +175,21 @@ def unon():
     #app.r('/off/')
     return redirect(url_for('unauth'))
 
+@app.route('/alarmon/')
+def alarmon():
+    print "Alarm Armed"
+    # Uncomment to run Script
+    subprocess.Popen(['/usr/bin/env', 'python', 'arm.py'], subprocess.PIPE)
+    #app.r('/off/')
+    return redirect(url_for('index'))
+
+@app.route('/alarmoff/')
+def alarmoff():
+    print "Alarm Disarmed"
+    # Uncomment to run Script
+    subprocess.Popen(['/usr/bin/env', 'python', 'disarm.py'], subprocess.PIPE)
+    #app.r('/off/')
+    return redirect(url_for('index'))
 
 
 @app.route('/on/')

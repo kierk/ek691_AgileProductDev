@@ -22,6 +22,11 @@ io.setup(door_pin, io.IN, pull_up_down=io.PUD_UP)
 
 def door_open():
 	logger.info('DOOR OPENED')
+	fp.open('alarm_set.txt', 'w')
+	alarm_set = fp.readline()
+	if(alarm_set == '1')
+		subprocess.Popen(['/usr/bin/env', 'python', 'trigger.py'], subprocess.PIPE)
+	fp.close()
 
 def door_close():
 	logger.info('DOOR CLOSED')
